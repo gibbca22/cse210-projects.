@@ -2,25 +2,26 @@ namespace JournalApp
 {
     class Entry
     {
-        public string Date { get; }
-        public string Prompt { get; }
-        public string Response { get; }
+        public string _Date { get; }
+        public string _Prompt { get; }
+        public string _Response { get; }
 
-        public Entry(string date, string prompt, string response)
+        public Entry(string _date, string _prompt, string _response)
         {
-            Date = date;
-            Prompt = prompt;
-            Response = response;
+            _Date = _date;
+            _Prompt = _prompt;
+            _Response = _response;
         }
 
         public override string ToString()
         {
-            return $"Date: {Date}\nPrompt: {Prompt}\nResponse: {Response}\n";
+            return $"Date: {_Date}\nPrompt: {_Prompt}\nResponse: {_Response}\n";
         }
 
+        // saving entry to a csv file
         public string ToCsv()
         {
-            return $"{Date}~|~{Prompt}~|~{Response}";
+            return $"{_Date}~|~{_Prompt}~|~{_Response}";
         }
 
         public static Entry FromCsv(string csvLine)

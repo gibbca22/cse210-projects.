@@ -6,13 +6,13 @@ namespace JournalApp
 {
     class Journal
     {
-        private List<Entry> entries;
-        private List<string> prompts;
+        private List<Entry> _entries;
+        private List<string> _prompts;
 
         public Journal()
         {
-            entries = new List<Entry>();
-            prompts = new List<string>
+            _entries = new List<Entry>();
+            _prompts = new List<string>
             {
                 "Who was the most interesting person I interacted with today?",
                 "What was the best part of my day?",
@@ -25,17 +25,17 @@ namespace JournalApp
         public void WriteNewEntry()
         {
             Random rand = new Random();
-            int index = rand.Next(prompts.Count);
-            string prompt = prompts[index];
-            Console.WriteLine(prompt);
-            string response = Console.ReadLine();
-            string date = DateTime.Now.ToString("yyyy-MM-dd");
-            entries.Add(new Entry(date, prompt, response));
+            int index = rand.Next(_prompts.Count);
+            string _prompt = _prompts[index];
+            Console.WriteLine(_prompt);
+            string _response = Console.ReadLine();
+            string _date = DateTime.Now.ToString("yyyy-MM-dd");
+            _entries.Add(new Entry(_date, _prompt, _response));
         }
 
         public void DisplayJournal()
         {
-            foreach (var entry in entries)
+            foreach (Entry entry in _entries)
             {
                 Console.WriteLine(entry);
             }
@@ -47,7 +47,7 @@ namespace JournalApp
             string filename = Console.ReadLine();
             using (StreamWriter writer = new StreamWriter(filename))
             {
-                foreach (var entry in entries)
+                foreach (Entry entry in _entries)
                 {
                     writer.WriteLine(entry.ToCsv());
                 }
@@ -58,13 +58,13 @@ namespace JournalApp
         {
             Console.Write("Enter filename to load from: ");
             string filename = Console.ReadLine();
-            entries.Clear();
+            _entries.Clear();
             using (StreamReader reader = new StreamReader(filename))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    entries.Add(Entry.FromCsv(line));
+                    _entries.Add(Entry.FromCsv(line));
                 }
             }
         }
